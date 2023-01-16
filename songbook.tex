@@ -1,11 +1,11 @@
-\documentclass{article}
+\documentclass[oneside]{article}
 
 \usepackage{a4wide}
+\usepackage[top=0.5in,bottom=0.7in,right=0.5in,left=0.5in,headheight=65pt]{geometry}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{graphicx}
 \usepackage[chorded]{songs}
 \usepackage{fancyhdr}
-%\usepackage[nott]{inconsolata}
 
 % No verse numbers.
 \noversenumbers
@@ -14,24 +14,25 @@
 \songcolumns{1}
 
 % Adjust baseline spacing,
-\baselineadj=15pt plus 15pt minus 0pt
+\baselineadj=4pt plus 15pt minus 0pt
 
 % Adjust chord spacing.
 \renewcommand{\clineparams}{
-  \baselineskip=18pt
-  \lineskiplimit=5pt
+  \baselineskip=14pt
+  \lineskiplimit=3pt
   \lineskip=5pt
 }
 
 % Change appearance of song number.
 \renewcommand{\snumbgcolor}{gray!60}
 \setlength{\songnumwidth}{15pt}
-\renewcommand{\printsongnum}[1]{\raisebox{-5pt}[10pt][15pt]{\hspace{1pt}\bfseries\LARGE#1}}
+\renewcommand{\printsongnum}[1]{\raisebox{-5pt}[7pt][10pt]{\hspace{2pt}\bfseries#1}}
 
 % Change appearance of song title.
-\renewcommand{\stitlefont}{
-\rmfamily\Large\bfseries\baselineskip=20pt\lineskiplimit=0pt
-}
+\renewcommand{\stitlefont}{\rmfamily\Large\bfseries\baselineskip=20pt\lineskiplimit=0pt}
+
+% Change appearance of song authors.
+\renewcommand{\showauthors}{\small\songauthors}
 
 % Print chords using colored boxes.
 \renewcommand\printchord[1]{\colorbox{orange!40}{#1}}
@@ -40,42 +41,99 @@
 %\renewcommand\printchord[1]{#1}
 
 % Print piano chord diagrams.
-\newcommand{\chordDiagram}[1]{\raisebox{13pt}{\printchord{#1}} \includegraphics[width=4cm]{Chords/#1.png}}
+\newcommand{\chordDiagram}[1]{\raisebox{13pt}{\printchord{#1}} \includegraphics[width=5cm]{Chords/#1.png}}
 
+% Set lengths
 \setlength{\parindent}{0cm}  % No paragraph indenting.
 \setlength{\fboxsep}{1pt}    % Spacing for chord boxes.
 
+% Add footer.
 \pagestyle{fancy}
 \fancyhead{}
 \renewcommand{\headrulewidth}{0pt} % no line in header area
 \fancyfoot{} % clear all footer fields
 \fancyfoot[R]{\thepage}           % page number in "outer" position of footer line
-\fancyfoot[L]{\tiny Only for non-commercial and educational purposes. Chord diagrams are taken from https://www.pianochord.org.} 
+\fancyfoot[L]{\small Only for non-commercial and educational purposes. Chord diagrams are taken from https://www.pianochord.org.} 
+
+% Fix to allow automatic verbatim line breaks.
+% This should likely not be needed after LaTeX gets updated
+% because the issue was fixed upstream.
+%
+% Therefore we do not need \brk command at this point.
+\makeatletter
+\renewcommand\SB@obeylines{%
+  \let\obeyedline\SB@par%
+  \obeylines%
+  \let\@par\SB@@par%
+}
+\makeatother
+
+% Use sans-serif font serif parts too.
+\renewcommand{\sffamily}{\rmfamily}
 
 \begin{document}
 \songsection{Songbook}
-
 \begin{songs}{}
 
-\beginsong{Doxology}[by={Louis Bourgeois and Thomas Ken},
-                     sr={Revelation 5:13},
-                     cr={Public domain.}]
-
+\beginsong{Falling Slowly}[by={Glen Hansard; Markéta Irglová}]
 \begin{center}
 \begin{tabular}{rr}
 \chordDiagram{C} & \chordDiagram{F} \\
 \chordDiagram{G} & \chordDiagram{Am}
 \end{tabular}
 \end{center}
-                     
+                
 \beginverse
-\[G]Praise God, \[D]from \[Em]Whom \[Bm]all \brk
-\[Em]bless\[D]ings \[G]flow;
-\[G]Praise Him, all \[D]crea\[Em]tures \[C]here \[G]be\[D]low;
-\[Em]Praise \[D]Him \[G]a\[D]bove, \[G]ye \[C]heav'n\[D]ly \[Em]host;
-\[G]Praise Fa\[Em]ther, \[D]Son, \[Am]and \[G/B G/C]Ho\[D]ly \[G]Ghost.
-\[C]A\[G]men.
+\[C] \[F] \[C] \[F]
 \endverse
+
+\beginverse
+\[C]I don't know you, \[F]but I want you \[C]all the more for \[F]that
+^Words fall through me and ^always fool me, ^and I can't re^act
+\endverse
+
+\beginverse
+\[Am]Games that \[G]never \[F]amount to \[G]more than they're \[Am]meant will \[G]play themselves \[F]out
+\endverse
+
+\beginchorus
+\[C]Take this sinking \[F]boat and point it \[Am]home, we've still got \[F]time
+^Raise your hopeful ^voice, you had the ^choice, you've made it ^now
+\endchorus
+
+\beginverse
+\[C]Falling slowly, \[F]eyes that know \[C]me, and I can't \[F]go back
+^Moods that take me ^and erase me, ^and I'm painted ^black
+\endverse
+
+\beginverse
+\[Am]You have \[G]suffered e\[F]nough and \[G]warred with your\[Am]self, it's \[G]time that you \[F]won
+\endverse
+
+\newchords{chrd}
+\beginchorus
+\memorize[chrd]\[C]Take this sinking \[F]boat and point it \[Am]home, we've still got \[F]time
+\replay[chrd]^Raise your hopeful ^voice, you had the ^choice, you've made it ^now
+\replay[chrd]^Falling slowly, ^sing your melo^dy, I'll sing it ^loud
+\endchorus
+
+\beginverse
+\[C] \[F] \[Am] \[F]
+\[F]
+\[C] \[F] \[C] \[F] \[C]
+\endverse
+
+\newpage
+\endsong
+
+\beginsong{Knockin On Heavens Door}[by={Bob Dylan}]
+\begin{center}
+\begin{tabular}{rr}
+\chordDiagram{C} & \chordDiagram{D} \\
+\chordDiagram{G} & \chordDiagram{Am}
+\end{tabular}
+\end{center}
+
 \endsong
 
 \end{songs}
