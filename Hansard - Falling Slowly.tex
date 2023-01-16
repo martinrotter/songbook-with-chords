@@ -1,0 +1,83 @@
+\documentclass{article}
+
+\usepackage{a4wide}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage[chorded]{songs}
+\usepackage{fancyhdr}
+%\usepackage[nott]{inconsolata}
+
+% No verse numbers.
+\noversenumbers
+
+% Only 1 column layout.
+\songcolumns{1}
+
+% Adjust baseline spacing,
+\baselineadj=15pt plus 15pt minus 0pt
+
+% Adjust chord spacing.
+\renewcommand{\clineparams}{
+  \baselineskip=18pt
+  \lineskiplimit=5pt
+  \lineskip=5pt
+}
+
+% Change appearance of song number.
+\renewcommand{\snumbgcolor}{gray!60}
+\setlength{\songnumwidth}{15pt}
+\renewcommand{\printsongnum}[1]{\raisebox{-5pt}[10pt][15pt]{\hspace{1pt}\bfseries\LARGE#1}}
+
+% Change appearance of song title.
+\renewcommand{\stitlefont}{
+\rmfamily\Large\bfseries\baselineskip=20pt\lineskiplimit=0pt
+}
+
+% Print chords using colored boxes.
+\renewcommand\printchord[1]{\colorbox{orange!40}{#1}}
+
+% For debugging purposes.
+%\renewcommand\printchord[1]{#1}
+
+% Print piano chord diagrams.
+\newcommand{\chordDiagram}[1]{\raisebox{13pt}{\printchord{#1}} \includegraphics[width=4cm]{Chords/#1.png}}
+
+\setlength{\parindent}{0cm}  % No paragraph indenting.
+\setlength{\fboxsep}{1pt}    % Spacing for chord boxes.
+
+\pagestyle{fancy}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt} % no line in header area
+\fancyfoot{} % clear all footer fields
+\fancyfoot[R]{\thepage}           % page number in "outer" position of footer line
+\fancyfoot[L]{\tiny Only for non-commercial and educational purposes. Chord diagrams are taken from https://www.pianochord.org.} 
+
+\begin{document}
+\songsection{Songbook}
+
+\begin{songs}{}
+
+\beginsong{Doxology}[by={Louis Bourgeois and Thomas Ken},
+                     sr={Revelation 5:13},
+                     cr={Public domain.}]
+
+\begin{center}
+\begin{tabular}{rr}
+\chordDiagram{C} & \chordDiagram{F} \\
+\chordDiagram{G} & \chordDiagram{Am}
+\end{tabular}
+\end{center}
+                     
+\beginverse
+\[G]Praise God, \[D]from \[Em]Whom \[Bm]all \brk
+\[Em]bless\[D]ings \[G]flow;
+\[G]Praise Him, all \[D]crea\[Em]tures \[C]here \[G]be\[D]low;
+\[Em]Praise \[D]Him \[G]a\[D]bove, \[G]ye \[C]heav'n\[D]ly \[Em]host;
+\[G]Praise Fa\[Em]ther, \[D]Son, \[Am]and \[G/B G/C]Ho\[D]ly \[G]Ghost.
+\[C]A\[G]men.
+\endverse
+\endsong
+
+\end{songs}
+
+\end{document}
