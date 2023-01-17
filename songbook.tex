@@ -1,51 +1,36 @@
-\documentclass[oneside]{article}
-
-\usepackage{a4wide}
+\documentclass[12pt,oneside]{article}
 \usepackage[top=0.5in,bottom=0.7in,right=0.5in,left=0.5in,headheight=65pt]{geometry}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{graphicx}
-\usepackage[chorded]{songs}
 \usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{leadsheets}
 
-% No verse numbers.
-%\noversenumbers
+% Setup leadsheets.
+\useleadsheetslibrary{musejazz}
+%\useleadsheetslibraries{musicsymbols}
 
-% Only 1 column layout.
-\songcolumns{1}
+% Custom title template.
+\definesongtitletemplate{title-templ}{
+\ifsongmeasuring
+{\section*}
+{\section}{%
+\songproperty{title}%
+\ifsongproperty{music}
+{ \small\textsuperscript{by \songproperty{music}}}
+{}%
+}}
 
-% Adjust baseline spacing,
-\baselineadj=4pt plus 15pt minus 0pt
-
-% Adjust chord spacing.
-\renewcommand{\clineparams}{
-  \baselineskip=14pt
-  \lineskiplimit=3pt
-  \lineskip=5pt
+\setleadsheets{
+  title-template = title-templ,
+  align-chords = l,
+  bar-shortcuts = true,
+  verse/numbered = true,
+  chords/format = \color{blue}\sffamily\large\bfseries
 }
 
-% Change appearance of song number.
-\renewcommand{\snumbgcolor}{gray!60}
-\setlength{\songnumwidth}{15pt}
-\renewcommand{\printsongnum}[1]{\raisebox{-5pt}[7pt][10pt]{\hspace{2pt}\bfseries#1}}
-
-% Change appearance of song title.
-\renewcommand{\stitlefont}{\rmfamily\Large\bfseries\baselineskip=20pt\lineskiplimit=0pt}
-
-% Change appearance of song authors.
-\renewcommand{\showauthors}{\small\songauthors}
-
-% Print chords using colored boxes.
-\renewcommand\printchord[1]{\colorbox{orange!40}{\bfseries#1}}
-
-% For debugging purposes.
-%\renewcommand\printchord[1]{#1}
-
 % Print piano chord diagrams.
-\newcommand{\chordDiagram}[1]{\raisebox{13pt}{\printchord{#1}} \includegraphics[width=5cm]{Chords/#1.png}}
-
-% Set lengths
-\setlength{\parindent}{0cm}  % No paragraph indenting.
-\setlength{\fboxsep}{1pt}    % Spacing for chord boxes.
+\newcommand{\chordDiagram}[1]{\raisebox{13pt}{\writechord{#1}} \includegraphics[width=5cm]{Chords/#1.png}}
 
 % Add footer.
 \pagestyle{fancy}
@@ -55,27 +40,14 @@
 \fancyfoot[R]{\thepage}           % page number in "outer" position of footer line
 \fancyfoot[L]{\small Only for non-commercial and educational purposes. Chord diagrams are taken from https://www.pianochord.org.} 
 
-% Fix to allow automatic verbatim line breaks.
-% This should likely not be needed after LaTeX gets updated
-% because the issue was fixed upstream.
-%
-% Therefore we do not need \brk command at this point.
-\makeatletter
-\renewcommand\SB@obeylines{%
-  \let\obeyedline\SB@par%
-  \obeylines%
-  \let\@par\SB@@par%
-}
-\makeatother
-
-% Use sans-serif font serif parts too.
-\renewcommand{\sffamily}{\rmfamily}
+% No numbering for \section.
+\setcounter{secnumdepth}{0}
 
 \begin{document}
-%\songsection{Songbook}
-\begin{songs}{}
+\tableofcontents
+\newpage
 
-\beginsong{Falling Slowly}[by={Glen Hansard; Markéta Irglová}]
+\begin{song}{title={Falling Slowly}, music={Glen Hansard \& Markéta Irglová}}
 \begin{center}
 \begin{tabular}{rr}
 \chordDiagram{C} & \chordDiagram{F} \\
@@ -83,53 +55,46 @@
 \end{tabular}
 \end{center}
 
-\meter{4}{4}
-                
-\beginverse
-| \[C] | \[F] | \[C] | \[F]
-\endverse
+\begin{intro}
+\meter{4}{4}\normalbar ^{C} \normalbar ^{F} \normalbar ^{C} \normalbar ^{F}
+\end{intro}
 
-\beginverse
-| \[C]I don't know you, | \[F]but I want you | \[C]all the more for that | \[F]
-| ^Words fall through me and | ^always fool me, | ^and I can't react | ^
-\endverse
+\begin{verse}
+| ^{C}I don't know you, | ^{F}but I want you | ^{C}all the more for that | ^{F} \\
+| ^{C}Words fall through me and | ^{F}always fool me, | ^{C}and I can't react | ^{F}
+\end{verse}
 
+\begin{verse}
+| ^{Am}Games that ^{G}never a|^{F}mount to ^{G}more than they're | ^{Am}meant will ^{G}play themselves | ^{F}out | ^{F}
+\end{verse}
 
-\beginverse
-| \[Am]Games that \[G]never a|\[F]mount to \[G]more than they're | \[Am]meant will \[G]play themselves | \[F]out |
-\endverse
+\begin{chorus}
+| ^{C}Take this sinking | ^{F}boat and point it | ^{Am}home, we've still got | ^{F}time \\
+| ^{C}Raise your hopeful | ^{F}voice, you had the | ^{Am}choice, you've made it | ^{F}now
+\end{chorus}
 
-\beginchorus
-| \[C]Take this sinking | \[F]boat and point it | \[Am]home, we've still got | \[F]time
-| ^Raise your hopeful | ^voice, you had the | ^choice, you've made it | ^now
-\endchorus
+\begin{verse}
+| ^{C}Falling slowly, | ^{F}eyes that know me, | ^{C}and I can't ^{F}go back | ^{F} \\
+| ^{C}Moods that take me | ^{F}and erase me, | ^{C}and I'm painted ^{F}black | ^{F}
+\end{verse}
 
-\beginverse
-| \[C]Falling slowly, | \[F]eyes that know me, | \[C]and I can't \[F]go back |
-| ^Moods that take me | ^and erase me, | ^and I'm painted ^black |
-\endverse
+\begin{verse}
+| ^{Am}You have ^{G}suffered e|^{F}nough and ^{G}warred with your|^{Am}self, it's ^{G}time that you | ^{F}won | ^{F}
+\end{verse}
 
-\beginverse
-| \[Am]You have \[G]suffered e|\[F]nough and \[G]warred with your|\[Am]self, it's \[G]time that you | \[F]won |
-\endverse
+\begin{chorus}
+| ^{C}Take this sinking | ^{F}boat and point it | ^{Am}home, we've still got | ^{F}time \\
+| ^{C}Raise your hopeful | ^{F}voice, you had the | ^{Am}choice, you've made it | ^{F}now \\
+| ^{C}Falling slowly, | ^{F}sing your melo|^{Am}dy, I'll sing it | ^{F}loud
+\end{chorus}
 
-\newchords{chrd}
-\beginchorus
-\memorize[chrd]| \[C]Take this sinking | \[F]boat and point it | \[Am]home, we've still got | \[F]time
-\replay[chrd]| ^Raise your hopeful | ^voice, you had the | ^choice, you've made it | ^now
-\replay[chrd]| ^Falling slowly, | ^sing your melo|^dy, I'll sing it | ^loud
-\endchorus
+\begin{outro}
+| ^{C} | ^{F} | ^{Am} | ^{F} \\
+| ^{C} | ^{F} | ^{C} | ^{F} | ^{C}
+\end{outro}
+\end{song}
 
-\beginverse
-| \[C] | \[F] | \[Am] | \[F]
-| \[F]
-| \[C] | \[F] | \[C] | \[F] | \[C]
-\endverse
-
-\newpage
-\endsong
-
-\beginsong{Knockin On Heavens Door}[by={Bob Dylan}]
+\begin{song}{title={Knockin On Heavens Door}, music={Bob Dylan}}
 \begin{center}
 \begin{tabular}{rr}
 \chordDiagram{C} & \chordDiagram{D} \\
@@ -137,45 +102,41 @@
 \end{tabular}
 \end{center}
 
-\beginverse
-\[G] \[D] \[Am] \[G] Oo \[D]oo-oo \[C]oo
-\[G] \[D] \[Am] \[G] Oo \[D]oo-oo \[C]oo
-\endverse
+\begin{intro}
+\meter{4}{4} ^{G} ^{D} ^{Am} ^{G} Oo ^{D}oo-oo ^{C}oo \\
+^{G} ^{D} ^{Am} ^{G} Oo ^{D}oo-oo ^{C}oo
+\end{intro}
 
-\beginverse
-\[G] Mama take this \[D]badge off of me \[Am]
-\[G] I can't \[D]use it anymore \[C]
-\[G] It's getting \[D]dark, too dark to see \[Am]
-\[G] I feel I'm \[D]knockin on heaven's door \[C]
-\endverse
+\begin{verse}
+^{G} Mama take this ^{D}badge off of me ^{Am} \\
+^{G} I can't ^{D}use it anymore ^{C} \\
+^{G} It's getting ^{D}dark, too dark to see ^{Am} \\
+^{G} I feel I'm ^{D}knockin on heaven's door ^{C}
+\end{verse}
 
-\beginchorus
-\[G] Knock, knock, \[D]knockin' on heaven's \[Am]door
-\[G] Knock, knock, \[D]knockin' on heaven's \[C]door
-\[G] Knock, knock, \[D]knockin' on heaven's \[Am]door
-\[G] Knock, knock, \[D]knockin' on heaven's \[C]door
-\endchorus
+\begin{chorus}
+^{G} Knock, knock, ^{D}knockin' on heaven's ^{Am}door \\
+^{G} Knock, knock, ^{D}knockin' on heaven's ^{C}door \\
+^{G} Knock, knock, ^{D}knockin' on heaven's ^{Am}door \\
+^{G} Knock, knock, ^{D}knockin' on heaven's ^{C}door
+\end{chorus}
 
-\beginverse
-\[G] Mama put my  \[D]guns in the ground \[Am]
-\[G] I can't \[D]shoot them anymore \[C]
-\[G] That long black \[D]cloud is comin' down \[Am]
-\[G] I feel I'm \[D]knockin' on heaven's door \[C]
-\endverse
+\begin{verse}
+^{G} Mama put my  ^{D}guns in the ground ^{Am} \\
+^{G} I can't ^{D}shoot them anymore ^{C} \\
+^{G} That long black ^{D}cloud is comin' down ^{Am} \\
+^{G} I feel I'm ^{D}knockin' on heaven's door ^{C}
+\end{verse}
 
-\beginchorus
-\[G] Knock, knock, \[D]knockin' on heaven's \[Am]door
-\[G] Knock, knock, \[D]knockin' on heaven's \[C]door
-\[G] Knock, knock, \[D]knockin' on heaven's \[Am]door
-\[G] Knock, knock, \[D]knockin' on heaven's \[C]door
-\endchorus
+\begin{chorus}
+^{G} Knock, knock, ^{D}knockin' on heaven's ^{Am}door \\
+^{G} Knock, knock, ^{D}knockin' on heaven's ^{C}door \\
+^{G} Knock, knock, ^{D}knockin' on heaven's ^{Am}door \\
+^{G} Knock, knock, ^{D}knockin' on heaven's ^{C}door
+\end{chorus}
 
-\beginverse
-\[G] Oo \[D]oo-oo \[Am]oo \[G](fade)
-\endverse
-
-\endsong
-
-\end{songs}
-
+\begin{outro}
+^{G} Oo ^{D}oo-oo ^{Am}oo ^{G}(fade)
+\end{outro}
+\end{song}
 \end{document}
